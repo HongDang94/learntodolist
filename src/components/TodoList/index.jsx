@@ -3,9 +3,7 @@ import TodoListItem from '../TodoListItem';
 
 function TodoList() {
     return (
-        <div>
-            <TodoListItem />
-        </div>
+        <TodoListItem listItem={[1, 2, 3]} />
     );
 }
 

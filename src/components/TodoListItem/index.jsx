@@ -1,42 +1,44 @@
 import React, { useState } from 'react';
+import FillItem from '../FillItem';
 
-const listItem = [ '1','2','3'];
+// const listItem = [ '1','2','3'];
 
-function TodoListItem() {
+function TodoListItem({ listItem }) {
     const [valueInput, setValueInput] = useState('');
     const [todoList, setTodoList] = useState(listItem);
 
-    const ulElement = document.querySelector('#listItem');
-    const liElement = document.createElement("li");
-
-    function getValueInput(e) {
-        const textInput = e.target.value;
-        setValueInput(textInput); 
-        liElement.textContent = valueInput;
-    }
-
     function handleAddItem() {
-        setTodoList(listItem.push(valueInput));
+        if(!valueInput.length) return;
+        setTodoList([...todoList, valueInput]);
         setValueInput('');
     }
 
+    // function getValueInput(e) {
+    //     const textInput = e.target.value;
+    //     setValueInput(textInput);
+    // }
+
     function removeItem(index) {
-        setTodoList(listItem.splice(index, 1));
+        const newList = [...todoList].filter((item, filterIndex) => filterIndex !== index);
+        setTodoList(newList);
     }
 
     return (
         <div>
-            <div>
+            <FillItem onAddItem={handleAddItem} />
+            {/* <div>
                 <input type="text" placeholder='nhập nội dung' value={valueInput} onChange={getValueInput}/>
-                <button type='button'
-                    onClick={handleAddItem}>Thêm nội dung</button>
-            </div>
-            <ul id="listItem">
-                {listItem.map((item, index) => (
-                    <li key={index}>{item} 
-                    <button type='button' onClick ={() => {removeItem(index)}}>x</button></li>
-                ))}
-            </ul>
+                <button type='button' onClick={handleAddItem}>Thêm nội dung</button>
+            </div> */}
+            {todoList.length ? 
+                <ul id='listItem'>
+                    {todoList.map((item, index) => 
+                        <li key={index}>{item} <button type='button' style={{marginLeft: 10}} onClick={() => {removeItem(index)}}>x</button></li>
+                    )}
+                </ul>
+                :
+                <p>Khong co</p>
+            }
         </div>
     );
 }
