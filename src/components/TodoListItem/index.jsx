@@ -13,10 +13,10 @@ function TodoListItem({ listItem }) {
         setValueInput('');
     }
 
-    // function getValueInput(e) {
-    //     const textInput = e.target.value;
-    //     setValueInput(textInput);
-    // }
+    function getValueInput(e) {
+        const textInput = e.target.value;
+        setValueInput(textInput);
+    }
 
     function removeItem(index) {
         const newList = [...todoList].filter((item, filterIndex) => filterIndex !== index);
@@ -25,11 +25,10 @@ function TodoListItem({ listItem }) {
 
     return (
         <div>
-            <FillItem onAddItem={handleAddItem} />
-            {/* <div>
+            <div>
                 <input type="text" placeholder='nhập nội dung' value={valueInput} onChange={getValueInput}/>
                 <button type='button' onClick={handleAddItem}>Thêm nội dung</button>
-            </div> */}
+            </div>
             {todoList.length ? 
                 <ul id='listItem'>
                     {todoList.map((item, index) => 
